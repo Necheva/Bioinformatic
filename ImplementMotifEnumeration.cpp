@@ -3,19 +3,20 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
-unsigned count(std::string & first, std::string & second)
+using namespace std;
+unsigned count(string & f, string & s)
 {
 	unsigned result = 0;;
-	for (size_t i = 0; i < first.size(); i++)
+	for (size_t i = 0; i < f.size(); i++)
 	{
-		if (first[i] != second[i]) 
+		if (f[i] != s[i]) 
 		{ 
 			result++;
 		}
 	}
 	return result;
 }
-using namespace std;
+
 int main()
 {
 	int k;
@@ -33,13 +34,13 @@ int main()
 	}
 	for (size_t i = 0; i < DNA_string.size(); i++)
 	{
-		std::vector<string> temp_vector_k_motifs;
+		vector<string> temp;
 		for (size_t j = 0; j < DNA_string[i].size() - k + 1; j++)
 		{
 			string k_motif = DNA_string[i].substr(j, k);
-			temp_vector_k_motifs.push_back(k_motif);
+			temp.push_back(k_motif);
 		}
-		matrix_motifs.push_back(temp_vector_k_motifs);
+		matrix_motifs.push_back(temp);
 	}
 
 	const unsigned total_words_count = pow(symbols.size(), k);
@@ -226,7 +227,7 @@ int main()
 		}
 	}
 
-	for (auto z = 0; z < arg.size(); z++)
+	for (auto index = 0; index < arg.size(); index++)
 	{
 		unsigned tmp = 0;
 		for (auto i = 0; i < matrix_motifs.size(); i++)
@@ -234,7 +235,7 @@ int main()
 			bool metka = false;
 			for (auto j = 0; j < matrix_motifs[i].size(); j++)
 			{
-				if (count(arg[z], matrix_motifs[i][j]) <= d)
+				if (count(arg[index], matrix_motifs[i][j]) <= d)
 				{
 					metka = true;
 					break;
@@ -251,7 +252,7 @@ int main()
 		}
 		if (tmp == matrix_motifs.size())
 		{ 
-			result.push_back(arg[z]); 
+			result.push_back(arg[index]); 
 		}
 	}
 
